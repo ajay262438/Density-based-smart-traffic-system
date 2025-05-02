@@ -1,0 +1,21 @@
+# Traffic Density Controlled Traffic Signal System
+# Author: Ajay Kumar
+# Description: YOLOv8-powered real-time vehicle detection and adaptive traffic light system.
+
+# --- Core dependencies ---
+ultralytics==8.0.204       # YOLOv8: Object detection model
+opencv-python==4.9.0.80    # OpenCV: Computer vision tasks (camera feed, drawing, etc.)
+numpy==1.26.4              # NumPy: Numerical operations on image arrays
+Pillow==10.2.0             # Pillow: Image processing (used with tkinter or for frame conversions)
+
+# --- GUI (optional, used for user interface) ---
+tk==0.1.0                  # tkinter wrapper for building GUI windows
+
+# --- Optional tools (uncomment if used) ---
+# pandas==2.2.2            # For structured data manipulation and logging
+# ttkthemes==3.2.2         # For custom tkinter GUI themes (optional)
+
+# --- Notes ---
+# - Tested on Python 3.11
+# - Run `pip install -r requirements.txt` to install all dependencies
+# - For YOLOv8 to work properly, ensure your system supports OpenCV and Torch backend
