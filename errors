@@ -1,0 +1,72 @@
+# Known Issues & Troubleshooting Guide
+
+This document lists common problems users may face while running the **Traffic Density Controlled Traffic Signal System**, along with their possible causes and suggested solutions.
+
+---
+
+## 1. 📷 Camera Feed Not Opening
+
+**Issue:** The camera window appears blank or doesn't respond.
+
+**Possible Causes:**
+- Incorrect IP address of the phone camera.
+- Phone and PC are not connected to the same network.
+- The camera feed link is not compatible with OpenCV (`cv2.VideoCapture()`).
+  
+**Solutions:**
+- Make sure your phone is connected to the same Wi-Fi network as your PC.
+- Use an IP webcam app (e.g., IP Webcam for Android).
+- Verify the IP stream (e.g., `http://192.168.x.x:8080/video`) and replace it in the script.
+- Restart the app and re-run the Python script.
+
+---
+
+## 2. 🧠 Detection Not Accurate
+
+**Issue:** Vehicles are not detected correctly, or detection results are inconsistent.
+
+**Possible Causes:**
+- Camera angle or lighting is poor.
+- YOLOv8 is detecting classes other than vehicles.
+  
+**Solutions:**
+- Ensure the phone camera is pointed clearly at the road with enough lighting.
+- Filter detections in code to only count specific classes (`car`, `truck`, `bus`, etc.).
+- Consider fine-tuning the YOLOv8 model if needed.
+
+---
+
+## 3. 🧮 IndexError in Detection Loop
+
+**Issue:** `IndexError: index X is out of bounds` or similar errors.
+
+**Cause:**
+- The code is attempting to access a value in an array that doesn’t exist (e.g., detection boxes).
+
+**Solution:**
+- Make sure to loop through results only when detections are available.
+- Always check the shape/length of the array before accessing elements.
+
+---
+
+## 4. 🖼️ GUI Window Too Large or Not Resizing
+
+**Issue:** The camera display window is too big or doesn't allow resizing.
+
+**Solution:**
+- Use OpenCV’s `cv2.resizeWindow()` to set the window size.
+- Ensure you're not calling `cv2.WINDOW_FULLSCREEN` accidentally.
+
+---
+
+## 5. 🔁 YOLO `render()` or `show()` Errors
+
+**Issue:** `AttributeError: 'Results' object has no attribute 'render'`
+
+**Cause:**
+- YOLOv8's latest version doesn’t use `.render()` or `.show()` like YOLOv5.
+
+**Solution:**
+- Use `result.plot()` instead to draw bounding boxes on the frame:
+  ```python
+  annotated_frame = result.plot()
